@@ -1,0 +1,19 @@
+FROM tabulario/spark-iceberg:3.5.1_1.5.0
+ENV DEBIAN_FRONTEND=noninteractive
+
+USER root
+
+#RUN apt install -y wget
+
+RUN cd /opt/spark/jars && wget https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk/1.12.262/aws-java-sdk-1.12.262.jar && \
+wget https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-core/1.12.262/aws-java-sdk-core-1.12.262.jar && \
+wget https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-s3/1.12.262/aws-java-sdk-s3-1.12.262.jar && \
+wget https://repo1.maven.org/maven2/com/amazonaws/aws-java-sdk-dynamodb/1.12.262/aws-java-sdk-dynamodb-1.12.262.jar && \
+wget https://repo1.maven.org/maven2/org/apache/hadoop/hadoop-aws/3.3.4/hadoop-aws-3.3.4.jar
+
+RUN apt update && apt -y install openjdk-11-jdk \
+    kinit \
+    krb5-user \
+    libpam-krb5 \
+    krb5-config \
+    libkrb5-dev 
